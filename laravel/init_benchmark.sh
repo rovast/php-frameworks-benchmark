@@ -5,6 +5,7 @@
 function clearCache() {
     sudo /bin/rm -rf bootstrap/cache/*
     sudo /bin/chmod -R 777 bootstrap/cache
+    sudo /bin/chmod -R 777 storage
 
     php artisan clear-compiled
     php artisan view:clear
