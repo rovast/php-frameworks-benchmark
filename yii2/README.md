@@ -1,233 +1,249 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+# yii 2.0.15 测试细节
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+### 1. Clear all caches and logs, warmup caches if needed 
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+run `sudo service nginx restart && sudo service php7.1-fpm restart`
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+### 2. Clear all caches and logs, warmup caches if needed 
 
-DIRECTORY STRUCTURE
--------------------
+run `./init_benchmark.sh`
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
 
+run `ab -n 1000 -c 1 http://127.0.0.1:8006/?r=api/hello`
 
+### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
-REQUIREMENTS
-------------
+run `ab -n 5000 -c 1 http://127.0.0.1:8006/?r=api/hello`
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
 
 
-INSTALLATION
-------------
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8006
 
-### Install via Composer
+Document Path:          /?r=api/hello
+Document Length:        11 bytes
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+Concurrency Level:      1
+Time taken for tests:   8.291 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1335000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    603.10 [#/sec] (mean)
+Time per request:       1.658 [ms] (mean)
+Time per request:       1.658 [ms] (mean, across all concurrent requests)
+Transfer rate:          157.25 [Kbytes/sec] received
 
-You can then install this project template using the following command:
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     1    2   0.6      2      20
+Waiting:        1    2   0.6      1      20
+Total:          1    2   0.6      2      20
+WARNING: The median and mean for the waiting time are not within a normal deviation
+        These results are probably not that reliable.
 
-~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      2
+  95%      2
+  98%      3
+  99%      4
+ 100%     20 (longest request)
 ```
+---
+run `ab -n 5000 -c 5 http://127.0.0.1:8006/?r=api/hello`
 
-You can then access the application through the following URL:
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
-
-    docker-compose run --rm php composer install    
-    
-Start the container
-
-    docker-compose up -d
-    
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
 
 
-CONFIGURATION
--------------
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8006
 
-### Database
+Document Path:          /?r=api/hello
+Document Length:        11 bytes
 
-Edit the file `config/db.php` with real data, for example:
+Concurrency Level:      5
+Time taken for tests:   2.714 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1335000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1842.30 [#/sec] (mean)
+Time per request:       2.714 [ms] (mean)
+Time per request:       0.543 [ms] (mean, across all concurrent requests)
+Transfer rate:          480.37 [Kbytes/sec] received
 
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    3   1.4      2      20
+Waiting:        1    3   1.4      2      20
+Total:          1    3   1.4      2      20
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      3
+  80%      3
+  90%      4
+  95%      5
+  98%      7
+  99%      8
+ 100%     20 (longest request)
 ```
+---
+run `ab -n 5000 -c 10 http://127.0.0.1:8006/?r=api/hello`
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
 
 
-TESTING
--------
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8006
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
+Document Path:          /?r=api/hello
+Document Length:        11 bytes
 
-- `unit`
-- `functional`
-- `acceptance`
+Concurrency Level:      10
+Time taken for tests:   2.424 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1335000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    2062.58 [#/sec] (mean)
+Time per request:       4.848 [ms] (mean)
+Time per request:       0.485 [ms] (mean, across all concurrent requests)
+Transfer rate:          537.80 [Kbytes/sec] received
 
-Tests can be executed by running
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     2    5   1.9      4      24
+Waiting:        2    5   1.9      4      24
+Total:          2    5   1.9      4      24
 
+Percentage of the requests served within a certain time (ms)
+  50%      4
+  66%      5
+  75%      5
+  80%      5
+  90%      8
+  95%      9
+  98%     11
+  99%     11
+ 100%     24 (longest request)
 ```
-vendor/bin/codecept run
+---
+run `ab -n 5000 -c 20 http://127.0.0.1:8006/?r=api/hello`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8006
+
+Document Path:          /?r=api/hello
+Document Length:        11 bytes
+
+Concurrency Level:      20
+Time taken for tests:   2.472 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1335000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    2023.00 [#/sec] (mean)
+Time per request:       9.886 [ms] (mean)
+Time per request:       0.494 [ms] (mean, across all concurrent requests)
+Transfer rate:          527.48 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     3   10   2.7      9      27
+Waiting:        2   10   2.7      9      27
+Total:          3   10   2.7      9      27
+
+Percentage of the requests served within a certain time (ms)
+  50%      9
+  66%     10
+  75%     11
+  80%     12
+  90%     14
+  95%     15
+  98%     16
+  99%     19
+ 100%     27 (longest request)
 ```
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
