@@ -4,11 +4,62 @@ php 主流框架压力测试
 
 ### 测试环境
 
-- OS: MacOS 10.14.1
-- Processor: 2.3 GHz Intel Core i5
-- Memory: 8 GB 2133 MHz LPDDR3
-- PHP: 7.1.24
-- Nginx: 1.15.6
+- OS: Deepin GNU/Linux 15.7
+- Processor: Intel Core i5 8400 @ 2.84 GHz x 6 
+- Memory: 7.63 G
+- PHP: 7.1.16
+- Nginx: 1.13.12
+
+PHP 已加载模块
+
+```bash
+# php -m
+
+[PHP Modules]
+calendar
+Core
+ctype
+date
+dom
+exif
+fileinfo
+filter
+ftp
+gettext
+hash
+iconv
+json
+libxml
+mbstring
+openssl
+pcntl
+pcre
+PDO
+Phar
+posix
+readline
+Reflection
+session
+shmop
+SimpleXML
+sockets
+SPL
+standard
+sysvmsg
+sysvsem
+sysvshm
+tokenizer
+wddx
+xml
+xmlreader
+xmlwriter
+xsl
+Zend OPcache
+zlib
+
+[Zend Modules]
+Zend OPcache
+```
 
 ### 测试策略
 
