@@ -19,6 +19,7 @@ PHP 已加载模块
 calendar
 Core
 ctype
+curl
 date
 dom
 exif
@@ -28,6 +29,7 @@ ftp
 gettext
 hash
 iconv
+intl
 json
 libxml
 mbstring
@@ -55,6 +57,7 @@ xmlreader
 xmlwriter
 xsl
 Zend OPcache
+zip
 zlib
 
 [Zend Modules]

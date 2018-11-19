@@ -43,22 +43,22 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   8.533 seconds
+Time taken for tests:   8.451 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      1105000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    585.98 [#/sec] (mean)
-Time per request:       1.707 [ms] (mean)
-Time per request:       1.707 [ms] (mean, across all concurrent requests)
-Transfer rate:          126.47 [Kbytes/sec] received
+Requests per second:    591.67 [#/sec] (mean)
+Time per request:       1.690 [ms] (mean)
+Time per request:       1.690 [ms] (mean, across all concurrent requests)
+Transfer rate:          127.69 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     1    2   0.3      2       5
-Waiting:        1    2   0.3      2       5
-Total:          1    2   0.3      2       5
+Connect:        0    0   0.0      0       1
+Processing:     1    2   0.2      2       5
+Waiting:        1    2   0.2      2       5
+Total:          1    2   0.2      2       6
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -69,7 +69,7 @@ Percentage of the requests served within a certain time (ms)
   95%      2
   98%      2
   99%      3
- 100%      5 (longest request)
+ 100%      6 (longest request)
 ```
 ---
 run `ab -n 5000 -c 5 http://127.0.0.1:8001/api/hello`
@@ -101,33 +101,33 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      5
-Time taken for tests:   2.922 seconds
+Time taken for tests:   2.798 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      1105000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    1711.23 [#/sec] (mean)
-Time per request:       2.922 [ms] (mean)
-Time per request:       0.584 [ms] (mean, across all concurrent requests)
-Transfer rate:          369.32 [Kbytes/sec] received
+Requests per second:    1787.24 [#/sec] (mean)
+Time per request:       2.798 [ms] (mean)
+Time per request:       0.560 [ms] (mean, across all concurrent requests)
+Transfer rate:          385.72 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     2    3   1.2      3      16
-Waiting:        1    3   1.2      3      16
-Total:          2    3   1.2      3      16
+Connect:        0    0   0.0      0       1
+Processing:     2    3   1.1      2      12
+Waiting:        2    3   1.1      2      12
+Total:          2    3   1.1      2      12
 
 Percentage of the requests served within a certain time (ms)
-  50%      3
+  50%      2
   66%      3
   75%      3
-  80%      4
-  90%      5
+  80%      3
+  90%      4
   95%      5
   98%      6
   99%      7
- 100%     16 (longest request)
+ 100%     12 (longest request)
 ```
 ---
 run `ab -n 5000 -c 10 http://127.0.0.1:8001/api/hello`
@@ -159,33 +159,33 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      10
-Time taken for tests:   2.251 seconds
+Time taken for tests:   2.500 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      1105000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    2221.14 [#/sec] (mean)
-Time per request:       4.502 [ms] (mean)
-Time per request:       0.450 [ms] (mean, across all concurrent requests)
-Transfer rate:          479.37 [Kbytes/sec] received
+Requests per second:    2000.37 [#/sec] (mean)
+Time per request:       4.999 [ms] (mean)
+Time per request:       0.500 [ms] (mean, across all concurrent requests)
+Transfer rate:          431.72 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     2    4   1.0      4      19
-Waiting:        2    4   1.0      4      19
-Total:          2    4   1.0      4      19
+Processing:     2    5   1.4      4      15
+Waiting:        2    5   1.4      4      15
+Total:          2    5   1.4      4      15
 
 Percentage of the requests served within a certain time (ms)
   50%      4
-  66%      4
-  75%      5
-  80%      5
-  90%      6
-  95%      6
-  98%      7
-  99%      8
- 100%     19 (longest request)
+  66%      5
+  75%      6
+  80%      6
+  90%      7
+  95%      8
+  98%      9
+  99%     10
+ 100%     15 (longest request)
 ```
 ---
 run `ab -n 5000 -c 20 http://127.0.0.1:8001/api/hello`
@@ -217,31 +217,31 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      20
-Time taken for tests:   2.439 seconds
+Time taken for tests:   2.533 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      1105000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    2049.65 [#/sec] (mean)
-Time per request:       9.758 [ms] (mean)
-Time per request:       0.488 [ms] (mean, across all concurrent requests)
-Transfer rate:          442.36 [Kbytes/sec] received
+Requests per second:    1973.61 [#/sec] (mean)
+Time per request:       10.134 [ms] (mean)
+Time per request:       0.507 [ms] (mean, across all concurrent requests)
+Transfer rate:          425.94 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     2   10   1.7      9      24
-Waiting:        2   10   1.7      9      24
-Total:          2   10   1.7      9      24
+Processing:     3   10   2.5      9      38
+Waiting:        2   10   2.5      9      38
+Total:          3   10   2.5      9      38
 
 Percentage of the requests served within a certain time (ms)
   50%      9
   66%     10
-  75%     10
-  80%     11
-  90%     12
-  95%     12
-  98%     13
-  99%     15
- 100%     24 (longest request)
+  75%     11
+  80%     12
+  90%     13
+  95%     15
+  98%     16
+  99%     17
+ 100%     38 (longest request)
 ```
