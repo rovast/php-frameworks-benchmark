@@ -1,37 +1,247 @@
-﻿## 简介
+# thinkphp 3.2.3 测试细节
 
-ThinkPHP 是一个免费开源的，快速、简单的面向对象的 轻量级PHP开发框架 ，创立于2006年初，遵循Apache2开源协议发布，是为了敏捷WEB应用开发和简化企业应用开发而诞生的。ThinkPHP从诞生以来一直秉承简洁实用的设计原则，在保持出色的性能和至简的代码的同时，也注重易用性。并且拥有众多的原创功能和特性，在社区团队的积极参与下，在易用性、扩展性和性能方面不断优化和改进，已经成长为国内最领先和最具影响力的WEB应用开发框架，众多的典型案例确保可以稳定用于商业以及门户级的开发。
+### 1. Clear all caches and logs, warmup caches if needed 
 
-## 全面的WEB开发特性支持
+run `sudo service nginx restart && sudo service php7.1-fpm restart`
 
-最新的ThinkPHP为WEB应用开发提供了强有力的支持，这些支持包括：
+### 2. Clear all caches and logs, warmup caches if needed 
 
-*  MVC支持-基于多层模型（M）、视图（V）、控制器（C）的设计模式
-*  ORM支持-提供了全功能和高性能的ORM支持，支持大部分数据库
-*  模板引擎支持-内置了高性能的基于标签库和XML标签的编译型模板引擎
-*  RESTFul支持-通过REST控制器扩展提供了RESTFul支持，为你打造全新的URL设计和访问体验
-*  云平台支持-提供了对新浪SAE平台和百度BAE平台的强力支持，具备“横跨性”和“平滑性”，支持本地化开发和调试以及部署切换，让你轻松过渡，打造全新的开发体验。
-*  CLI支持-支持基于命令行的应用开发
-*  RPC支持-提供包括PHPRpc、HProse、jsonRPC和Yar在内远程调用解决方案
-*  MongoDb支持-提供NoSQL的支持
-*  缓存支持-提供了包括文件、数据库、Memcache、Xcache、Redis等多种类型的缓存支持
+run `./init_benchmark.sh`
 
-## 大道至简的开发理念
+### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
 
-ThinkPHP从诞生以来一直秉承大道至简的开发理念，无论从底层实现还是应用开发，我们都倡导用最少的代码完成相同的功能，正是由于对简单的执着和代码的修炼，让我们长期保持出色的性能和极速的开发体验。在主流PHP开发框架的评测数据中表现卓越，简单和快速开发是我们不变的宗旨。
+run `ab -n 1000 -c 1 http://127.0.0.1:8009/?m=home&c=api&a=hello`
 
-## 安全性
+### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
-框架在系统层面提供了众多的安全特性，确保你的网站和产品安全无忧。这些特性包括：
+run `ab -n 5000 -c 1 http://127.0.0.1:8009/?m=home&c=api&a=hello`
 
-*  XSS安全防护
-*  表单自动验证
-*  强制数据类型转换
-*  输入数据过滤
-*  表单令牌验证
-*  防SQL注入
-*  图像上传检测
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
-## 商业友好的开源协议
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
 
-ThinkPHP遵循Apache2开源协议发布。Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再作为开源或商业软件发布。
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8009
+
+Document Path:          /?m=home&c=api&a=hello
+Document Length:        11 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.854 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1585000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1297.20 [#/sec] (mean)
+Time per request:       0.771 [ms] (mean)
+Time per request:       0.771 [ms] (mean, across all concurrent requests)
+Transfer rate:          401.58 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     1    1   0.3      1       5
+Waiting:        1    1   0.3      1       5
+Total:          1    1   0.3      1       5
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      2
+  99%      3
+ 100%      5 (longest request)
+```
+---
+run `ab -n 5000 -c 5 http://127.0.0.1:8009/?m=home&c=api&a=hello`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8009
+
+Document Path:          /?m=home&c=api&a=hello
+Document Length:        11 bytes
+
+Concurrency Level:      5
+Time taken for tests:   1.341 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1585000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    3729.09 [#/sec] (mean)
+Time per request:       1.341 [ms] (mean)
+Time per request:       0.268 [ms] (mean, across all concurrent requests)
+Transfer rate:          1154.42 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     1    1   1.0      1       8
+Waiting:        0    1   1.0      1       8
+Total:          1    1   1.0      1       9
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      2
+  95%      4
+  98%      5
+  99%      6
+ 100%      9 (longest request)
+```
+---
+run `ab -n 5000 -c 10 http://127.0.0.1:8009/?m=home&c=api&a=hello`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8009
+
+Document Path:          /?m=home&c=api&a=hello
+Document Length:        11 bytes
+
+Concurrency Level:      10
+Time taken for tests:   1.261 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1585000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    3964.20 [#/sec] (mean)
+Time per request:       2.523 [ms] (mean)
+Time per request:       0.252 [ms] (mean, across all concurrent requests)
+Transfer rate:          1227.20 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    2   1.6      2      12
+Waiting:        1    2   1.6      2      12
+Total:          1    3   1.6      2      12
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      4
+  95%      7
+  98%      9
+  99%     10
+ 100%     12 (longest request)
+```
+---
+run `ab -n 5000 -c 20 http://127.0.0.1:8009/?m=home&c=api&a=hello`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8009
+
+Document Path:          /?m=home&c=api&a=hello
+Document Length:        11 bytes
+
+Concurrency Level:      20
+Time taken for tests:   1.420 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1585000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    3522.08 [#/sec] (mean)
+Time per request:       5.678 [ms] (mean)
+Time per request:       0.284 [ms] (mean, across all concurrent requests)
+Transfer rate:          1090.33 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       2
+Processing:     2    6   4.1      4      56
+Waiting:        2    6   4.1      4      56
+Total:          2    6   4.1      4      56
+
+Percentage of the requests served within a certain time (ms)
+  50%      4
+  66%      5
+  75%      6
+  80%      7
+  90%     10
+  95%     12
+  98%     14
+  99%     15
+ 100%     56 (longest request)
+```
