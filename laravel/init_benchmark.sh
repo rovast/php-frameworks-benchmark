@@ -19,12 +19,14 @@ function clearCache() {
     rm storage/logs/laravel.log
 }
 
-function init() {
-    clearCache
-    composer install --no-dev --classmap-authoritative
-    clearCache
-    php artisan config:cache
-    php artisan route:cache
+# init
 
-    return 0;
-}
+echo "prepare for testing ...."
+
+clearCache
+composer install --no-dev --classmap-authoritative
+clearCache
+php artisan config:cache
+php artisan route:cache
+
+echo "prepare finish"
