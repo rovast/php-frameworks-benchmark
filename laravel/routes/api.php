@@ -18,3 +18,4 @@ use Illuminate\Http\Request;
 //});
 
 Route::get('hello', 'ApiController@hello');
+Route::get('db', 'ApiController@db');
