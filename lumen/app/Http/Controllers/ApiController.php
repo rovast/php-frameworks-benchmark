@@ -13,4 +13,10 @@ class ApiController extends Controller
     {
         return response('hello world');
     }
+
+    public function db()
+    {
+        $result = app('db')->select('SELECT * FROM `test`');
+        return $result[0]->name;
+    }
 }

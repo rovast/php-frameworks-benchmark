@@ -16,3 +16,4 @@
 //});
 
 $router->get('api/hello', 'ApiController@hello');
+$router->get('api/db', 'ApiController@db');

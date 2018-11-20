@@ -11,6 +11,7 @@ run `./init_benchmark.sh`
 ### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8003/api/hello`
+run `ab -n 1000 -c 1 http://127.0.0.1:8003/api/db`
 
 ### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
@@ -244,4 +245,238 @@ Percentage of the requests served within a certain time (ms)
   98%      7
   99%      8
  100%     10 (longest request)
+```
+
+### 5.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+
+run `ab -n 5000 -c 1 http://127.0.0.1:8003/api/db`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8003
+
+Document Path:          /api/db
+Document Length:        11 bytes
+
+Concurrency Level:      1
+Time taken for tests:   9.523 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    525.07 [#/sec] (mean)
+Time per request:       1.905 [ms] (mean)
+Time per request:       1.905 [ms] (mean, across all concurrent requests)
+Transfer rate:          113.32 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     1    2   0.4      2       6
+Waiting:        1    2   0.4      2       5
+Total:          1    2   0.4      2       6
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      2
+  95%      3
+  98%      3
+  99%      4
+ 100%      6 (longest request)
+```
+---
+run `ab -n 5000 -c 5 http://127.0.0.1:8003/api/db`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8003
+
+Document Path:          /api/db
+Document Length:        11 bytes
+
+Concurrency Level:      5
+Time taken for tests:   3.318 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1506.78 [#/sec] (mean)
+Time per request:       3.318 [ms] (mean)
+Time per request:       0.664 [ms] (mean, across all concurrent requests)
+Transfer rate:          325.19 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    3   1.4      3      13
+Waiting:        1    3   1.4      3      13
+Total:          2    3   1.4      3      13
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      4
+  80%      4
+  90%      5
+  95%      6
+  98%      7
+  99%      8
+ 100%     13 (longest request)
+```
+---
+run `ab -n 5000 -c 10 http://127.0.0.1:8003/api/db`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8003
+
+Document Path:          /api/db
+Document Length:        11 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.006 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1663.43 [#/sec] (mean)
+Time per request:       6.012 [ms] (mean)
+Time per request:       0.601 [ms] (mean, across all concurrent requests)
+Transfer rate:          359.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     3    6   2.0      5      20
+Waiting:        3    6   2.0      5      18
+Total:          3    6   2.0      5      20
+
+Percentage of the requests served within a certain time (ms)
+  50%      5
+  66%      6
+  75%      7
+  80%      7
+  90%      9
+  95%     10
+  98%     12
+  99%     13
+ 100%     20 (longest request)
+```
+---
+run `ab -n 5000 -c 20 http://127.0.0.1:8003/api/db`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8003
+
+Document Path:          /api/db
+Document Length:        11 bytes
+
+Concurrency Level:      20
+Time taken for tests:   2.912 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1716.91 [#/sec] (mean)
+Time per request:       11.649 [ms] (mean)
+Time per request:       0.582 [ms] (mean, across all concurrent requests)
+Transfer rate:          370.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     3   12   2.9     11      28
+Waiting:        2   12   2.9     11      28
+Total:          3   12   2.9     11      28
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     12
+  75%     13
+  80%     14
+  90%     16
+  95%     17
+  98%     19
+  99%     21
+ 100%     28 (longest request)
 ```
