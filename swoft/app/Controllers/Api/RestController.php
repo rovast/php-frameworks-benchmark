@@ -34,6 +34,15 @@ class RestController
     }
 
     /**
+     * @RequestMapping(route="/api/hello", method={RequestMethod::GET})
+     * @author ROVAST
+     */
+    public function hello()
+    {
+        return 'hello world';
+    }
+
+    /**
      * 创建一个用户
      * 地址:/api/user.
      *
