@@ -18,7 +18,7 @@ run `ab -n 1000 -c 1 http://127.0.0.1:8003/api/redis`
 
 ### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
-run `ab -n 5000 -c 1 http://127.0.0.1:8003/api/hello`
+run `ab -n 50000 -c 1 http://127.0.0.1:8003/api/hello`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -26,17 +26,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -47,22 +47,22 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   3.594 seconds
-Complete requests:      5000
+Time taken for tests:   39.704 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    1391.16 [#/sec] (mean)
-Time per request:       0.719 [ms] (mean)
-Time per request:       0.719 [ms] (mean, across all concurrent requests)
-Transfer rate:          300.24 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    1259.31 [#/sec] (mean)
+Time per request:       0.794 [ms] (mean)
+Time per request:       0.794 [ms] (mean, across all concurrent requests)
+Transfer rate:          271.79 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     1    1   0.1      1       2
-Waiting:        1    1   0.1      1       2
-Total:          1    1   0.1      1       2
+Connect:        0    0   0.0      0       1
+Processing:     1    1   0.3      1      58
+Waiting:        1    1   0.2      1       4
+Total:          1    1   0.3      1      58
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -72,11 +72,11 @@ Percentage of the requests served within a certain time (ms)
   90%      1
   95%      1
   98%      1
-  99%      1
- 100%      2 (longest request)
+  99%      2
+ 100%     58 (longest request)
 ```
 ---
-run `ab -n 5000 -c 5 http://127.0.0.1:8003/api/hello`
+run `ab -n 50000 -c 5 http://127.0.0.1:8003/api/hello`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -84,17 +84,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -105,22 +105,22 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      5
-Time taken for tests:   1.050 seconds
-Complete requests:      5000
+Time taken for tests:   9.813 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    4761.69 [#/sec] (mean)
-Time per request:       1.050 [ms] (mean)
-Time per request:       0.210 [ms] (mean, across all concurrent requests)
-Transfer rate:          1027.67 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    5095.16 [#/sec] (mean)
+Time per request:       0.981 [ms] (mean)
+Time per request:       0.196 [ms] (mean, across all concurrent requests)
+Transfer rate:          1099.64 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     1    1   0.4      1       5
-Waiting:        1    1   0.4      1       5
-Total:          1    1   0.4      1       5
+Connect:        0    0   0.0      0       2
+Processing:     1    1   1.4      1     209
+Waiting:        0    1   1.4      1     209
+Total:          1    1   1.4      1     209
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -131,10 +131,10 @@ Percentage of the requests served within a certain time (ms)
   95%      2
   98%      2
   99%      3
- 100%      5 (longest request)
+ 100%    209 (longest request)
 ```
 ---
-run `ab -n 5000 -c 10 http://127.0.0.1:8003/api/hello`
+run `ab -n 50000 -c 10 http://127.0.0.1:8003/api/hello`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -142,17 +142,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -163,36 +163,36 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      10
-Time taken for tests:   0.921 seconds
-Complete requests:      5000
+Time taken for tests:   7.510 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    5427.96 [#/sec] (mean)
-Time per request:       1.842 [ms] (mean)
-Time per request:       0.184 [ms] (mean, across all concurrent requests)
-Transfer rate:          1171.46 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    6657.57 [#/sec] (mean)
+Time per request:       1.502 [ms] (mean)
+Time per request:       0.150 [ms] (mean, across all concurrent requests)
+Transfer rate:          1436.84 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     1    2   0.7      2      10
-Waiting:        1    2   0.7      2      10
-Total:          1    2   0.7      2      10
+Processing:     1    1   0.3      1       7
+Waiting:        1    1   0.3      1       7
+Total:          1    1   0.3      1       7
 
 Percentage of the requests served within a certain time (ms)
-  50%      2
+  50%      1
   66%      2
   75%      2
   80%      2
   90%      2
-  95%      3
-  98%      4
-  99%      5
- 100%     10 (longest request)
+  95%      2
+  98%      2
+  99%      2
+ 100%      7 (longest request)
 ```
 ---
-run `ab -n 5000 -c 20 http://127.0.0.1:8003/api/hello`
+run `ab -n 50000 -c 20 http://127.0.0.1:8003/api/hello`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -200,17 +200,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -221,38 +221,38 @@ Document Path:          /api/hello
 Document Length:        11 bytes
 
 Concurrency Level:      20
-Time taken for tests:   0.996 seconds
-Complete requests:      5000
+Time taken for tests:   7.915 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    5018.90 [#/sec] (mean)
-Time per request:       3.985 [ms] (mean)
-Time per request:       0.199 [ms] (mean, across all concurrent requests)
-Transfer rate:          1083.18 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    6317.51 [#/sec] (mean)
+Time per request:       3.166 [ms] (mean)
+Time per request:       0.158 [ms] (mean, across all concurrent requests)
+Transfer rate:          1363.45 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     1    4   1.0      4      10
-Waiting:        1    4   1.0      4      10
-Total:          2    4   1.0      4      10
+Connect:        0    0   0.0      0       1
+Processing:     1    3   0.5      3      10
+Waiting:        1    3   0.5      3      10
+Total:          1    3   0.5      3      10
 
 Percentage of the requests served within a certain time (ms)
-  50%      4
-  66%      4
-  75%      4
-  80%      4
-  90%      5
-  95%      6
-  98%      7
-  99%      8
+  50%      3
+  66%      3
+  75%      3
+  80%      3
+  90%      4
+  95%      4
+  98%      4
+  99%      5
  100%     10 (longest request)
 ```
 
 ### 5.  [MySQL]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
-run `ab -n 5000 -c 1 http://127.0.0.1:8003/api/db`
+run `ab -n 50000 -c 1 http://127.0.0.1:8003/api/db`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -260,17 +260,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -281,22 +281,22 @@ Document Path:          /api/db
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   9.523 seconds
-Complete requests:      5000
+Time taken for tests:   91.635 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    525.07 [#/sec] (mean)
-Time per request:       1.905 [ms] (mean)
-Time per request:       1.905 [ms] (mean, across all concurrent requests)
-Transfer rate:          113.32 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    545.64 [#/sec] (mean)
+Time per request:       1.833 [ms] (mean)
+Time per request:       1.833 [ms] (mean, across all concurrent requests)
+Transfer rate:          117.76 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     1    2   0.4      2       6
-Waiting:        1    2   0.4      2       5
-Total:          1    2   0.4      2       6
+Processing:     1    2   0.3      2      25
+Waiting:        1    2   0.3      2      25
+Total:          1    2   0.3      2      25
 
 Percentage of the requests served within a certain time (ms)
   50%      2
@@ -304,13 +304,13 @@ Percentage of the requests served within a certain time (ms)
   75%      2
   80%      2
   90%      2
-  95%      3
-  98%      3
-  99%      4
- 100%      6 (longest request)
+  95%      2
+  98%      2
+  99%      3
+ 100%     25 (longest request)
 ```
 ---
-run `ab -n 5000 -c 5 http://127.0.0.1:8003/api/db`
+run `ab -n 50000 -c 5 http://127.0.0.1:8003/api/db`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -318,17 +318,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -339,36 +339,36 @@ Document Path:          /api/db
 Document Length:        11 bytes
 
 Concurrency Level:      5
-Time taken for tests:   3.318 seconds
-Complete requests:      5000
+Time taken for tests:   22.615 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    1506.78 [#/sec] (mean)
-Time per request:       3.318 [ms] (mean)
-Time per request:       0.664 [ms] (mean, across all concurrent requests)
-Transfer rate:          325.19 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    2210.88 [#/sec] (mean)
+Time per request:       2.262 [ms] (mean)
+Time per request:       0.452 [ms] (mean, across all concurrent requests)
+Transfer rate:          477.15 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       1
-Processing:     1    3   1.4      3      13
-Waiting:        1    3   1.4      3      13
-Total:          2    3   1.4      3      13
+Connect:        0    0   0.0      0       4
+Processing:     1    2   1.1      2     206
+Waiting:        1    2   1.1      2     206
+Total:          2    2   1.1      2     206
 
 Percentage of the requests served within a certain time (ms)
-  50%      3
-  66%      3
-  75%      4
-  80%      4
-  90%      5
-  95%      6
-  98%      7
-  99%      8
- 100%     13 (longest request)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      3
+  95%      3
+  98%      4
+  99%      4
+ 100%    206 (longest request)
 ```
 ---
-run `ab -n 5000 -c 10 http://127.0.0.1:8003/api/db`
+run `ab -n 50000 -c 10 http://127.0.0.1:8003/api/db`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -376,17 +376,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -397,36 +397,36 @@ Document Path:          /api/db
 Document Length:        11 bytes
 
 Concurrency Level:      10
-Time taken for tests:   3.006 seconds
-Complete requests:      5000
+Time taken for tests:   22.391 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    1663.43 [#/sec] (mean)
-Time per request:       6.012 [ms] (mean)
-Time per request:       0.601 [ms] (mean, across all concurrent requests)
-Transfer rate:          359.00 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    2233.02 [#/sec] (mean)
+Time per request:       4.478 [ms] (mean)
+Time per request:       0.448 [ms] (mean, across all concurrent requests)
+Transfer rate:          481.93 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     3    6   2.0      5      20
-Waiting:        3    6   2.0      5      18
-Total:          3    6   2.0      5      20
+Processing:     2    4   0.8      4      16
+Waiting:        2    4   0.8      4      16
+Total:          3    4   0.8      4      16
 
 Percentage of the requests served within a certain time (ms)
-  50%      5
-  66%      6
-  75%      7
-  80%      7
-  90%      9
-  95%     10
-  98%     12
-  99%     13
- 100%     20 (longest request)
+  50%      4
+  66%      4
+  75%      5
+  80%      5
+  90%      5
+  95%      6
+  98%      7
+  99%      8
+ 100%     16 (longest request)
 ```
 ---
-run `ab -n 5000 -c 20 http://127.0.0.1:8003/api/db`
+run `ab -n 50000 -c 20 http://127.0.0.1:8003/api/db`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -434,17 +434,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -455,38 +455,38 @@ Document Path:          /api/db
 Document Length:        11 bytes
 
 Concurrency Level:      20
-Time taken for tests:   2.912 seconds
-Complete requests:      5000
+Time taken for tests:   22.201 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    1716.91 [#/sec] (mean)
-Time per request:       11.649 [ms] (mean)
-Time per request:       0.582 [ms] (mean, across all concurrent requests)
-Transfer rate:          370.54 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    2252.16 [#/sec] (mean)
+Time per request:       8.880 [ms] (mean)
+Time per request:       0.444 [ms] (mean, across all concurrent requests)
+Transfer rate:          486.06 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     3   12   2.9     11      28
-Waiting:        2   12   2.9     11      28
-Total:          3   12   2.9     11      28
+Processing:     2    9   1.2      9      26
+Waiting:        2    9   1.2      9      25
+Total:          3    9   1.2      9      26
 
 Percentage of the requests served within a certain time (ms)
-  50%     11
-  66%     12
-  75%     13
-  80%     14
-  90%     16
-  95%     17
-  98%     19
-  99%     21
- 100%     28 (longest request)
+  50%      9
+  66%      9
+  75%      9
+  80%      9
+  90%     10
+  95%     10
+  98%     12
+  99%     14
+ 100%     26 (longest request)
 ```
 
 ### 6.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
-run `ab -n 5000 -c 1 http://127.0.0.1:8003/api/redis`
+run `ab -n 50000 -c 1 http://127.0.0.1:8003/api/redis`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -494,17 +494,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -515,15 +515,15 @@ Document Path:          /api/redis
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   4.917 seconds
-Complete requests:      5000
+Time taken for tests:   50.627 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    1016.85 [#/sec] (mean)
-Time per request:       0.983 [ms] (mean)
-Time per request:       0.983 [ms] (mean, across all concurrent requests)
-Transfer rate:          219.46 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    987.62 [#/sec] (mean)
+Time per request:       1.013 [ms] (mean)
+Time per request:       1.013 [ms] (mean, across all concurrent requests)
+Transfer rate:          213.15 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
@@ -544,7 +544,7 @@ Percentage of the requests served within a certain time (ms)
  100%      4 (longest request)
 ```
 ---
-run `ab -n 5000 -c 5 http://127.0.0.1:8003/api/redis`
+run `ab -n 50000 -c 5 http://127.0.0.1:8003/api/redis`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -552,17 +552,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -573,22 +573,22 @@ Document Path:          /api/redis
 Document Length:        11 bytes
 
 Concurrency Level:      5
-Time taken for tests:   1.265 seconds
-Complete requests:      5000
+Time taken for tests:   11.700 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    3952.63 [#/sec] (mean)
-Time per request:       1.265 [ms] (mean)
-Time per request:       0.253 [ms] (mean, across all concurrent requests)
-Transfer rate:          853.06 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    4273.42 [#/sec] (mean)
+Time per request:       1.170 [ms] (mean)
+Time per request:       0.234 [ms] (mean, across all concurrent requests)
+Transfer rate:          922.29 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     1    1   0.3      1       5
-Waiting:        1    1   0.3      1       5
-Total:          1    1   0.3      1       5
+Processing:     1    1   0.5      1      14
+Waiting:        1    1   0.5      1      14
+Total:          1    1   0.5      1      14
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -598,11 +598,11 @@ Percentage of the requests served within a certain time (ms)
   90%      2
   95%      2
   98%      2
-  99%      2
- 100%      5 (longest request)
+  99%      3
+ 100%     14 (longest request)
 ```
 ---
-run `ab -n 5000 -c 10 http://127.0.0.1:8003/api/redis`
+run `ab -n 50000 -c 10 http://127.0.0.1:8003/api/redis`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -610,17 +610,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -631,36 +631,36 @@ Document Path:          /api/redis
 Document Length:        11 bytes
 
 Concurrency Level:      10
-Time taken for tests:   1.411 seconds
-Complete requests:      5000
+Time taken for tests:   11.091 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    3543.24 [#/sec] (mean)
-Time per request:       2.822 [ms] (mean)
-Time per request:       0.282 [ms] (mean, across all concurrent requests)
-Transfer rate:          764.70 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    4508.09 [#/sec] (mean)
+Time per request:       2.218 [ms] (mean)
+Time per request:       0.222 [ms] (mean, across all concurrent requests)
+Transfer rate:          972.94 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     1    3   0.9      3      11
-Waiting:        1    3   0.9      3      11
-Total:          1    3   0.9      3      11
+Processing:     1    2   0.7      2      13
+Waiting:        1    2   0.7      2      13
+Total:          1    2   0.7      2      13
 
 Percentage of the requests served within a certain time (ms)
-  50%      3
-  66%      3
-  75%      3
-  80%      3
+  50%      2
+  66%      2
+  75%      2
+  80%      2
   90%      3
-  95%      5
-  98%      6
-  99%      7
- 100%     11 (longest request)
+  95%      3
+  98%      4
+  99%      6
+ 100%     13 (longest request)
 ```
 ---
-run `ab -n 5000 -c 20 http://127.0.0.1:8003/api/redis`
+run `ab -n 50000 -c 20 http://127.0.0.1:8003/api/redis`
 
 ```bash
 This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
@@ -668,17 +668,17 @@ Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking 127.0.0.1 (be patient)
-Completed 500 requests
-Completed 1000 requests
-Completed 1500 requests
-Completed 2000 requests
-Completed 2500 requests
-Completed 3000 requests
-Completed 3500 requests
-Completed 4000 requests
-Completed 4500 requests
 Completed 5000 requests
-Finished 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
 
 
 Server Software:        nginx/1.13.12
@@ -689,31 +689,31 @@ Document Path:          /api/redis
 Document Length:        11 bytes
 
 Concurrency Level:      20
-Time taken for tests:   1.352 seconds
-Complete requests:      5000
+Time taken for tests:   11.045 seconds
+Complete requests:      50000
 Failed requests:        0
-Total transferred:      1105000 bytes
-HTML transferred:       55000 bytes
-Requests per second:    3699.40 [#/sec] (mean)
-Time per request:       5.406 [ms] (mean)
-Time per request:       0.270 [ms] (mean, across all concurrent requests)
-Transfer rate:          798.41 [Kbytes/sec] received
+Total transferred:      11050000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    4526.78 [#/sec] (mean)
+Time per request:       4.418 [ms] (mean)
+Time per request:       0.221 [ms] (mean, across all concurrent requests)
+Transfer rate:          976.97 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       1
-Processing:     1    5   1.7      5      16
-Waiting:        1    5   1.6      5      16
-Total:          2    5   1.7      5      16
+Connect:        0    0   0.0      0       3
+Processing:     1    4   1.5      4     213
+Waiting:        1    4   1.5      4     213
+Total:          1    4   1.5      4     213
 
 Percentage of the requests served within a certain time (ms)
-  50%      5
-  66%      5
-  75%      6
-  80%      6
-  90%      8
-  95%      9
-  98%     10
-  99%     11
- 100%     16 (longest request)
+  50%      4
+  66%      4
+  75%      4
+  80%      5
+  90%      5
+  95%      6
+  98%      9
+  99%     10
+ 100%    213 (longest request)
 ```
