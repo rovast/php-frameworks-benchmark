@@ -36,4 +36,20 @@ class Api extends Controller
 
         $this->output($val);
     }
+
+    public function actionSetPRedis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        $result = $redis->set('msf-p', 'hello world', 60 * 3600);
+        $this->output($result);
+    }
+
+    public function actionPredis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        $result = $redis->get('msf-p');
+        $this->output($result);
+    }
 }
