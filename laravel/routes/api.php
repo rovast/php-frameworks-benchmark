@@ -19,3 +19,5 @@ use Illuminate\Http\Request;
 
 Route::get('hello', 'ApiController@hello');
 Route::get('db', 'ApiController@db');
+Route::get('setRedis', 'ApiController@setRedis');
+Route::get('redis', 'ApiController@redis');

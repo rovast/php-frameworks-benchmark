@@ -12,6 +12,8 @@ run `./init_benchmark.sh`
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/hello`
 run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/db`
+run `ab -n 1 -c 1 http://127.0.0.1:8001/api/setRedis`
+run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/redis`
 
 ### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
@@ -479,4 +481,238 @@ Percentage of the requests served within a certain time (ms)
   98%     25
   99%     28
  100%     41 (longest request)
+```
+
+### 6.  [redis] 5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+
+run `ab -n 5000 -c 1 http://127.0.0.1:8001/api/redis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /api/redis
+Document Length:        11 bytes
+
+Concurrency Level:      1
+Time taken for tests:   10.766 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    464.41 [#/sec] (mean)
+Time per request:       2.153 [ms] (mean)
+Time per request:       2.153 [ms] (mean, across all concurrent requests)
+Transfer rate:          100.23 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     2    2   0.4      2       6
+Waiting:        2    2   0.4      2       6
+Total:          2    2   0.4      2       6
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      2
+  95%      2
+  98%      4
+  99%      4
+ 100%      6 (longest request)
+```
+---
+run `ab -n 5000 -c 5 http://127.0.0.1:8001/api/redis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /api/redis
+Document Length:        11 bytes
+
+Concurrency Level:      5
+Time taken for tests:   3.201 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1561.83 [#/sec] (mean)
+Time per request:       3.201 [ms] (mean)
+Time per request:       0.640 [ms] (mean, across all concurrent requests)
+Transfer rate:          337.08 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     2    3   1.2      3      15
+Waiting:        2    3   1.2      3      15
+Total:          2    3   1.2      3      15
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      4
+  80%      4
+  90%      5
+  95%      5
+  98%      6
+  99%      7
+ 100%     15 (longest request)
+```
+---
+run `ab -n 5000 -c 10 http://127.0.0.1:8001/api/redis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /api/redis
+Document Length:        11 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.384 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1477.50 [#/sec] (mean)
+Time per request:       6.768 [ms] (mean)
+Time per request:       0.677 [ms] (mean, across all concurrent requests)
+Transfer rate:          318.87 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     3    7   3.3      7     208
+Waiting:        3    7   3.3      7     208
+Total:          3    7   3.3      7     208
+
+Percentage of the requests served within a certain time (ms)
+  50%      7
+  66%      7
+  75%      7
+  80%      8
+  90%      9
+  95%      9
+  98%     11
+  99%     12
+ 100%    208 (longest request)
+```
+---
+run `ab -n 5000 -c 20 http://127.0.0.1:8001/api/redis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8001
+
+Document Path:          /api/redis
+Document Length:        11 bytes
+
+Concurrency Level:      20
+Time taken for tests:   2.944 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1105000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    1698.48 [#/sec] (mean)
+Time per request:       11.775 [ms] (mean)
+Time per request:       0.589 [ms] (mean, across all concurrent requests)
+Transfer rate:          366.57 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       2
+Processing:     3   12   2.2     11      30
+Waiting:        3   12   2.2     11      30
+Total:          3   12   2.2     11      31
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     12
+  75%     12
+  80%     12
+  90%     15
+  95%     16
+  98%     18
+  99%     19
+ 100%     31 (longest request)
 ```

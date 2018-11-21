@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -20,5 +21,16 @@ class ApiController extends Controller
     {
         $result = DB::table('test')->where('id', 1)->first();
         echo $result->name;
+    }
+
+    public function setRedis()
+    {
+        Cache::add('laravel', 'hello redis', 60);
+    }
+
+    public function redis()
+    {
+        $result = Cache::get('laravel');
+        return $result;
     }
 }
