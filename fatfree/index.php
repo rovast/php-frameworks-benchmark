@@ -102,4 +102,39 @@ $f3->route('GET /api/db',
     }
 );
 
+$f3->route('GET /api/setRedis',
+    function ($f3) {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1');
+        $redis->set('fatfree', 'hello world', 60 * 3600);
+        echo $redis->close();
+    }
+);
+
+$f3->route('GET /api/redis',
+    function ($f3) {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1');
+        $result = $redis->get('fatfree');
+        echo $result;
+    }
+);
+
+$f3->route('GET /api/setPRedis',
+    function ($f3) {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        echo $redis->set('fatfree-p', 'hello world', 60 * 3600);
+    }
+);
+
+$f3->route('GET /api/predis',
+    function ($f3) {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        $result = $redis->get('fatfree-p');
+        echo $result;
+    }
+);
+
 $f3->run();
