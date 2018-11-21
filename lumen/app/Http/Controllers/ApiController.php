@@ -32,4 +32,19 @@ class ApiController extends Controller
         $result = Cache::get('lumen');
         return $result;
     }
+
+    public function setPRedis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        echo $redis->set('lumen-p', 'hello world', 60 * 3600);
+    }
+
+    public function predis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        $result = $redis->get('lumen-p');
+        return $result;
+    }
 }

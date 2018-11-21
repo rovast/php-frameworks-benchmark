@@ -19,3 +19,5 @@ $router->get('api/hello', 'ApiController@hello');
 $router->get('api/db', 'ApiController@db');
 $router->get('api/setRedis', 'ApiController@setRedis');
 $router->get('api/redis', 'ApiController@redis');
+$router->get('api/setPRedis', 'ApiController@setPRedis');
+$router->get('api/predis', 'ApiController@predis');
