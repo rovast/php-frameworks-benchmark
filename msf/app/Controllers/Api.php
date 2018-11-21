@@ -16,4 +16,11 @@ class Api extends Controller
     {
         $this->output('hello world');
     }
+
+    public function actionDb()
+    {
+        $bizLists  = yield $this->getMysqlPool('master')->select("*")->from('test')->go();
+        $result = $bizLists['result'][0];
+        $this->output($result['name']);
+    }
 }
