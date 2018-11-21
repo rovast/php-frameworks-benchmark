@@ -28,4 +28,19 @@ class Api extends CI_Controller
         $result = $this->cache->redis->get('ci');
         echo $result;
     }
+
+    public function setPRedis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        echo $redis->set('ci-p', 'hello world', 60 * 3600);
+    }
+
+    public function predis()
+    {
+        $redis = new \Redis();
+        $redis->pconnect('127.0.0.1');
+        $result = $redis->get('ci-p');
+        echo $result;
+    }
 }
