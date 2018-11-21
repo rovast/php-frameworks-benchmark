@@ -12,6 +12,7 @@ run `./init_benchmark.sh`
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8011/test.php`
 run `ab -n 1000 -c 1 http://127.0.0.1:8011/db.php`
+run `ab -n 1 -c 1 http://127.0.0.1:8011/setRedis.php`
 run `ab -n 1000 -c 1 http://127.0.0.1:8011/redis.php`
 
 ### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
@@ -517,15 +518,15 @@ Document Path:          /redis.php
 Document Length:        11 bytes
 
 Concurrency Level:      1
-Time taken for tests:   1.466 seconds
+Time taken for tests:   1.379 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      745000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    3411.27 [#/sec] (mean)
-Time per request:       0.293 [ms] (mean)
-Time per request:       0.293 [ms] (mean, across all concurrent requests)
-Transfer rate:          496.37 [Kbytes/sec] received
+Requests per second:    3624.57 [#/sec] (mean)
+Time per request:       0.276 [ms] (mean)
+Time per request:       0.276 [ms] (mean, across all concurrent requests)
+Transfer rate:          527.40 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
@@ -575,33 +576,33 @@ Document Path:          /redis.php
 Document Length:        11 bytes
 
 Concurrency Level:      5
-Time taken for tests:   0.485 seconds
+Time taken for tests:   0.405 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      745000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    10313.17 [#/sec] (mean)
-Time per request:       0.485 [ms] (mean)
-Time per request:       0.097 [ms] (mean, across all concurrent requests)
-Transfer rate:          1500.65 [Kbytes/sec] received
+Requests per second:    12340.19 [#/sec] (mean)
+Time per request:       0.405 [ms] (mean)
+Time per request:       0.081 [ms] (mean, across all concurrent requests)
+Transfer rate:          1795.59 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     0    0   0.2      0       8
-Waiting:        0    0   0.2      0       8
-Total:          0    0   0.2      0       8
+Processing:     0    0   0.2      0       3
+Waiting:        0    0   0.2      0       3
+Total:          0    0   0.2      0       3
 
 Percentage of the requests served within a certain time (ms)
   50%      0
   66%      0
   75%      0
-  80%      1
+  80%      0
   90%      1
   95%      1
   98%      1
   99%      1
- 100%      8 (longest request)
+ 100%      3 (longest request)
 ```
 ---
 run `ab -n 5000 -c 10 http://127.0.0.1:8011/redis.php`
@@ -633,22 +634,22 @@ Document Path:          /redis.php
 Document Length:        11 bytes
 
 Concurrency Level:      10
-Time taken for tests:   0.485 seconds
+Time taken for tests:   0.421 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      745000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    10315.19 [#/sec] (mean)
-Time per request:       0.969 [ms] (mean)
-Time per request:       0.097 [ms] (mean, across all concurrent requests)
-Transfer rate:          1500.94 [Kbytes/sec] received
+Requests per second:    11876.40 [#/sec] (mean)
+Time per request:       0.842 [ms] (mean)
+Time per request:       0.084 [ms] (mean, across all concurrent requests)
+Transfer rate:          1728.11 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     0    1   0.4      1       6
-Waiting:        0    1   0.4      1       6
-Total:          1    1   0.4      1       6
+Processing:     0    1   0.3      1       4
+Waiting:        0    1   0.3      1       4
+Total:          0    1   0.3      1       4
 
 Percentage of the requests served within a certain time (ms)
   50%      1
@@ -659,7 +660,7 @@ Percentage of the requests served within a certain time (ms)
   95%      1
   98%      2
   99%      2
- 100%      6 (longest request)
+ 100%      4 (longest request)
 ```
 ---
 run `ab -n 5000 -c 20 http://127.0.0.1:8011/redis.php`
@@ -691,32 +692,32 @@ Document Path:          /redis.php
 Document Length:        11 bytes
 
 Concurrency Level:      20
-Time taken for tests:   0.479 seconds
+Time taken for tests:   0.360 seconds
 Complete requests:      5000
 Failed requests:        0
 Total transferred:      745000 bytes
 HTML transferred:       55000 bytes
-Requests per second:    10430.18 [#/sec] (mean)
-Time per request:       1.918 [ms] (mean)
-Time per request:       0.096 [ms] (mean, across all concurrent requests)
-Transfer rate:          1517.67 [Kbytes/sec] received
+Requests per second:    13883.14 [#/sec] (mean)
+Time per request:       1.441 [ms] (mean)
+Time per request:       0.072 [ms] (mean, across all concurrent requests)
+Transfer rate:          2020.11 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       0
-Processing:     1    2   0.6      2       7
-Waiting:        1    2   0.6      2       7
-Total:          1    2   0.6      2       7
+Processing:     1    1   0.3      1       4
+Waiting:        1    1   0.3      1       4
+Total:          1    1   0.3      1       4
 
 Percentage of the requests served within a certain time (ms)
-  50%      2
-  66%      2
-  75%      2
-  80%      2
+  50%      1
+  66%      1
+  75%      1
+  80%      1
   90%      2
-  95%      3
-  98%      4
-  99%      5
- 100%      7 (longest request)
+  95%      2
+  98%      2
+  99%      3
+ 100%      4 (longest request)
 ```
 
