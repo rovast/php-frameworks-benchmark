@@ -49,4 +49,20 @@ class ApiController extends Yaf_Controller_Abstract
 
         return false;
     }
+
+    public function setRedisAction()
+    {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1');
+        $redis->set('yaf', 'hello world', 60 * 3600);
+        $redis->close();
+    }
+
+    public function redisAction()
+    {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1');
+        $result = $redis->get('yaf');
+        echo $result;
+    }
 }
