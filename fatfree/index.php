@@ -83,4 +83,10 @@ $f3->route('GET /userref',
 	}
 );
 
+$f3->route('GET /api/hello',
+    function($f3) {
+        echo 'hello world';
+    }
+);
+
 $f3->run();
