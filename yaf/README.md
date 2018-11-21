@@ -15,6 +15,9 @@ run `ab -n 1000 -c 1 http://127.0.0.1:8012/api/db`
 run `ab -n 1 -c 1 http://127.0.0.1:8012/api/setRedis`
 run `ab -n 1000 -c 1 http://127.0.0.1:8012/api/redis`
 
+run `ab -n 1 -c 1 http://127.0.0.1:8012/api/setPRedis`
+run `ab -n 1000 -c 1 http://127.0.0.1:8012/api/predis`
+
 ### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8012/api/hello`
@@ -715,5 +718,239 @@ Percentage of the requests served within a certain time (ms)
   98%      8
   99%     12
  100%    213 (longest request)
+```
+
+### 7.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+
+run `ab -n 50000 -c 1 http://127.0.0.1:8012/api/predis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8012
+
+Document Path:          /api/predis
+Document Length:        11 bytes
+
+Concurrency Level:      1
+Time taken for tests:   14.999 seconds
+Complete requests:      50000
+Failed requests:        0
+Total transferred:      7450000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    3333.50 [#/sec] (mean)
+Time per request:       0.300 [ms] (mean)
+Time per request:       0.300 [ms] (mean, across all concurrent requests)
+Transfer rate:          485.05 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.1      0       2
+Waiting:        0    0   0.1      0       2
+Total:          0    0   0.1      0       2
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      2 (longest request)
+```
+---
+run `ab -n 50000 -c 5 http://127.0.0.1:8012/api/predis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8012
+
+Document Path:          /api/predis
+Document Length:        11 bytes
+
+Concurrency Level:      5
+Time taken for tests:   4.275 seconds
+Complete requests:      50000
+Failed requests:        0
+Total transferred:      7450000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    11694.56 [#/sec] (mean)
+Time per request:       0.428 [ms] (mean)
+Time per request:       0.086 [ms] (mean, across all concurrent requests)
+Transfer rate:          1701.65 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     0    0   1.9      0     209
+Waiting:        0    0   1.9      0     209
+Total:          0    0   1.9      0     209
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%    209 (longest request)
+```
+---
+run `ab -n 50000 -c 10 http://127.0.0.1:8012/api/predis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8012
+
+Document Path:          /api/predis
+Document Length:        11 bytes
+
+Concurrency Level:      10
+Time taken for tests:   3.330 seconds
+Complete requests:      50000
+Failed requests:        0
+Total transferred:      7450000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    15014.01 [#/sec] (mean)
+Time per request:       0.666 [ms] (mean)
+Time per request:       0.067 [ms] (mean, across all concurrent requests)
+Transfer rate:          2184.66 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     0    1   0.2      1      10
+Waiting:        0    1   0.2      1      10
+Total:          0    1   0.2      1      10
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%     10 (longest request)
+```
+---
+run `ab -n 50000 -c 20 http://127.0.0.1:8012/api/predis`
+
+```bash
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
+
+
+Server Software:        nginx/1.13.12
+Server Hostname:        127.0.0.1
+Server Port:            8012
+
+Document Path:          /api/predis
+Document Length:        11 bytes
+
+Concurrency Level:      20
+Time taken for tests:   3.292 seconds
+Complete requests:      50000
+Failed requests:        0
+Total transferred:      7450000 bytes
+HTML transferred:       550000 bytes
+Requests per second:    15189.04 [#/sec] (mean)
+Time per request:       1.317 [ms] (mean)
+Time per request:       0.066 [ms] (mean, across all concurrent requests)
+Transfer rate:          2210.12 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     0    1   0.3      1       5
+Waiting:        0    1   0.3      1       5
+Total:          0    1   0.3      1       6
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      2
+  95%      2
+  98%      2
+  99%      3
+ 100%      6 (longest request)
 ```
 
