@@ -1,21 +1,21 @@
-# laravel 5.7 测试细节
+### laravel 5.7 测试细节
 
-### 1. Clear all caches and logs, warmup caches if needed 
+**1. Clear all caches and logs, warmup caches if needed** 
 
 run `sudo service nginx restart && sudo service php7.1-fpm restart`
 
-### 2. Clear all caches and logs, warmup caches if needed 
+**2. Clear all caches and logs, warmup caches if needed** 
 
 run `./init_benchmark.sh`
 
-### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
+**3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache**
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/hello`
 run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/db`
 run `ab -n 1 -c 1 http://127.0.0.1:8001/api/setRedis`
 run `ab -n 1000 -c 1 http://127.0.0.1:8001/api/redis`
 
-### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8001/api/hello`
 
@@ -249,7 +249,7 @@ Percentage of the requests served within a certain time (ms)
  100%     22 (longest request)
 ```
 
-### 5.  [DB test] 5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**5.  [DB test] 5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8001/api/db`
 
@@ -483,7 +483,7 @@ Percentage of the requests served within a certain time (ms)
  100%    226 (longest request)
 ```
 
-### 6.  [redis] 5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**6.  [redis] 5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8001/api/redis`
 

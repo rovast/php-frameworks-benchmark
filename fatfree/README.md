@@ -1,14 +1,14 @@
-# fuelphp 1.8.1 测试细节
+### fatfree 测试细节
 
-### 1. Clear all caches and logs, warmup caches if needed 
+**1. Clear all caches and logs, warmup caches if needed** 
 
 run `sudo service nginx restart && sudo service php7.1-fpm restart`
 
-### 2. Clear all caches and logs, warmup caches if needed 
+**2. Clear all caches and logs, warmup caches if needed** 
 
 run `./init_benchmark.sh`
 
-### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
+**3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache**
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8021/api/hello`
 run `ab -n 1000 -c 1 http://127.0.0.1:8021/api/db`
@@ -19,7 +19,7 @@ run `ab -n 1000 -c 1 http://127.0.0.1:8021/api/redis`
 run `ab -n 1 -c 1 http://127.0.0.1:8021/api/setPRedis`
 run `ab -n 1000 -c 1 http://127.0.0.1:8021/api/predis`
 
-### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8021/api/hello`
 
@@ -253,7 +253,7 @@ Percentage of the requests served within a certain time (ms)
  100%    209 (longest request)
 ```
 
-### 5.  [MySQL]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**5.  [MySQL]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8021/api/db`
 
@@ -487,7 +487,7 @@ Percentage of the requests served within a certain time (ms)
  100%    212 (longest request)
 ```
 
-### 6.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**6.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8012/api/redis`
 
@@ -721,7 +721,7 @@ Percentage of the requests served within a certain time (ms)
  100%    218 (longest request)
 ```
 
-### 7.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**7.  [redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8012/api/predis`
 

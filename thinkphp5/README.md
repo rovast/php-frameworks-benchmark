@@ -1,14 +1,14 @@
-# thinkphp 5.0.22 测试细节
+### thinkphp 5.0.22 测试细节
 
-### 1. Clear all caches and logs, warmup caches if needed 
+**1. Clear all caches and logs, warmup caches if needed** 
 
 run `sudo service nginx restart && sudo service php7.1-fpm restart`
 
-### 2. Clear all caches and logs, warmup caches if needed 
+**2. Clear all caches and logs, warmup caches if needed** 
 
 run `./init_benchmark.sh`
 
-### 3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache
+**3.  First unsaved benchmark is launched, 1,000 calls, concurrency 1, to init caches and fill OPCache**
 
 run `ab -n 1000 -c 1 http://127.0.0.1:8010/?s=/index/api/hello`
 run `ab -n 1000 -c 1 http://127.0.0.1:8010/?s=/index/api/db`
@@ -18,7 +18,7 @@ run `ab -n 1000 -c 1 http://127.0.0.1:8010/?s=/index/api/redis`
 run `ab -n 1 -c 1 http://127.0.0.1:8010/?s=/index/api/setPRedis`
 run `ab -n 1000 -c 1 http://127.0.0.1:8010/?s=/index/api/predis`
 
-### 4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**4.  5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8010/?s=/index/api/hello`
 
@@ -252,7 +252,7 @@ Percentage of the requests served within a certain time (ms)
  100%      8 (longest request)
 ```
 
-### 5.  [MySQL]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**5.  [MySQL]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8010/?s=/index/api/db`
 
@@ -486,7 +486,7 @@ Percentage of the requests served within a certain time (ms)
  100%     21 (longest request)
 ```
 
-### 6.  [Redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**6.  [Redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8010/?s=/index/api/redis`
 
@@ -720,7 +720,7 @@ Percentage of the requests served within a certain time (ms)
  100%     11 (longest request)
 ```
 
-### 7.  [Redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20) 
+**7.  [Redis]5 benchmarks are launched, 50,000 calls, for each concurrencies (1, 5, 10 and 20)** 
 
 run `ab -n 50000 -c 1 http://127.0.0.1:8010/?s=/index/api/predis`
 
