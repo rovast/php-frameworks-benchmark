@@ -1,5 +1,7 @@
 <?php
 
+require_once "/var/www/html/xhgui/external/header.php";
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

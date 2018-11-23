@@ -1,5 +1,7 @@
 <?php
 
+require_once "/var/www/html/xhgui/external/header.php";
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
