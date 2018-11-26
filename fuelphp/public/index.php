@@ -1,4 +1,8 @@
 <?php
+
+require_once "/var/www/html/xhgui/external/header.php";
+
+
 /**
  * Fuel is a fast, lightweight, community driven PHP 5.4+ framework.
  *
